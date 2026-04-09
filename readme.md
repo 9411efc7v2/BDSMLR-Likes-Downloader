@@ -7,12 +7,13 @@ A Python script to scrape and collect image URLs from your liked posts on [bdsml
 ## Features
 
 - Scrapes all liked image posts across paginated likes feed
-- Captures both **original posts** and **reblogs**
+- Captures both original posts and reblogs
 - Deduplicates URLs against existing output file
-- Retries failed pages up to 3 times
-- Automatically re-authenticates if session expires mid-run
-- Post-run report
-- Optional direct download via `gallery-dl`
+- Automatic retry on page loading error
+- Automatic re-authentication if session expires mid-run
+- Post-run report showing number of total downloads, successful and failed image extractions, and skipped pages
+- Optional direct download via gallery-dl integration
+- Updated UI for better useability and aesthetics
 
 
 
