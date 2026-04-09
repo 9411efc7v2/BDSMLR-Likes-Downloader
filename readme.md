@@ -35,23 +35,23 @@ Export your bdsmlr session cookies in Netscape format using a browser extension:
 
 Then pass the file with `-c`:
 ```
-python bdsmlr_get_likes_fast.py -c C:\Path\To\cookies.txt
+python bdsmlr_get_likes.py -c C:\Path\To\cookies.txt
 ```
 
 ### Username & Password
 Set your credentials as the defaults in the script, or pass them as arguments:
 ```
-python bdsmlr_get_likes_fast.py -u your@email.com -p yourpassword
+python bdsmlr_get_likes.py -u your@email.com -p yourpassword
 ```
 
 
 
 ## Usage
 
-_Shift + Right-Click_ in the folder containing **bdsmlr_get_likes_fast.py** and click _Open Powershell window here_. Then Run:
+_Shift + Right-Click_ in the folder containing **bdsmlr_get_likes.py** and click _Open Powershell window here_. Then Run:
 
 ```
-python bdsmlr_get_likes_fast.py [options]
+python bdsmlr_get_likes.py [options]
 ```
 
 ### Options
@@ -70,17 +70,17 @@ python bdsmlr_get_likes_fast.py [options]
 
 Scrape all likes from the beginning:
 ```
-python bdsmlr_get_likes_fast.py -c cookies.txt
+python bdsmlr_get_likes.py -c cookies.txt
 ```
 
 Scrape pages 10 through 50:
 ```
-python bdsmlr_get_likes_fast.py -c cookies.txt -s 10 -e 50
+python bdsmlr_get_likes.py -c cookies.txt -s 10 -e 50
 ```
 
 Scrape with a custom log tag and custom output file:
 ```
-python bdsmlr_get_likes_fast.py -c cookies.txt --tag myuser -o my_likes.txt
+python bdsmlr_get_likes.py -c cookies.txt --tag myuser -o my_likes.txt
 ```
 
 
