@@ -1,14 +1,119 @@
-# bdsmlr-scripts
+# BDSMLR Likes Downloader
 
-Random scripts to do various things with BDSMLR due to the fact that they have no easily accessible API. Use at your own discretion.
+A Python script to scrape and collect image URLs from your liked posts on [bdsmlr.com](https://bdsmlr.com), outputting them to a text file for use with a download utility like `gallery-dl`.
 
-## note
 
-For scripts that output a file with URLs for download, I won't be implementing a pure python solution to download them. There's tons of alternatives, or even just some pure bash you can write to get the same result, faster and easier. Or just use something such as aria2c which has an easy to use argument to download an entire file's worth of URLs with ease.
 
-## usage
+## Features
 
-Be sure to disable infinite scrolling on archive pages, otherwise this _will not work_.
+- Scrapes all liked image posts across paginated likes feed
+- Captures both **original posts** and **reblogs**
+- Deduplicates URLs against existing output file
+- Retries failed pages up to 3 times
+- Automatically re-authenticates if session expires mid-run
+- Post-run report
+- Optional direct download via `gallery-dl`
 
-1. Install requirements, `pip install -r requirements.txt`.
-2. Run any of the scripts with your python 3.6+ interpreter.
+
+
+## Requirements
+
+```
+pip install requests lxml colorama gallery-dl
+```
+
+
+
+## Authentication
+
+Two methods are supported:
+
+### Cookie file (recommended)
+Export your bdsmlr session cookies in Netscape format using a browser extension:
+- **Chrome/Edge**: [Get cookies.txt LOCALLY](https://chrome.google.com/webstore/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc)
+- **Firefox**: [cookies.txt](https://addons.mozilla.org/en-US/firefox/addon/cookies-txt/)
+
+Then pass the file with `-c`:
+```
+python bdsmlr_get_likes_fast.py -c C:\Path\To\cookies.txt
+```
+
+### Username & Password
+Set your credentials as the defaults in the script, or pass them as arguments:
+```
+python bdsmlr_get_likes_fast.py -u your@email.com -p yourpassword
+```
+
+
+
+## Usage
+
+_Shift + Right-Click_ in the folder containing **bdsmlr_get_likes_fast.py** and click _Open Powershell window here_. Then Run:
+
+```
+python bdsmlr_get_likes_fast.py [options]
+```
+
+### Options
+
+| Argument | Default | Description |
+||||
+| `-u`, `--username` | *[set in script]* | bdsmlr account email |
+| `-p`, `--password` | *[set in script]* | bdsmlr account password |
+| `-c`, `--cookies-file` | `None` | Path to Netscape cookies.txt file |
+| `-s`, `--start-page` | `1` | Page to start scraping from |
+| `-e`, `--end-page` | `None` | Page to stop scraping at (inclusive) |
+| `-o`, `--output` | `bdsmlr_likes.txt` | Output file for collected URLs |
+| `--tag` | *[set in script]* | Custom label shown in log messages |
+
+### Examples
+
+Scrape all likes from the beginning:
+```
+python bdsmlr_get_likes_fast.py -c cookies.txt
+```
+
+Scrape pages 10 through 50:
+```
+python bdsmlr_get_likes_fast.py -c cookies.txt -s 10 -e 50
+```
+
+Scrape with a custom log tag and custom output file:
+```
+python bdsmlr_get_likes_fast.py -c cookies.txt --tag myuser -o my_likes.txt
+```
+
+
+
+## Output
+
+URLs are written one per line to the output file (default: `bdsmlr_likes.txt`):
+
+```
+https://ocdn012.bdsmlr.com/uploads/photos/2026/03/424632/bdsmlr-424632-abc123.jpg
+https://ocdn012.bdsmlr.com/uploads/photos/2026/03/245966/bdsmlr-245966-def456.jpeg
+...
+```
+
+
+
+## Downloading Images
+
+### gallery-dl
+
+Use the built-in prompt at the end of the script to launch gallery-dl automatically, or start the download manually with:
+
+```
+gallery-dl -i bdsmlr_likes.txt
+```
+
+
+
+
+
+## Notes
+
+- **Disable infinite scrolling** on your bdsmlr archive/likes page before running, otherwise pagination will not work
+- The script is safe to re-run — existing URLs in the output file are loaded on startup and skipped
+- Cookie files expire — if authentication fails, re-export your cookies and try again
+- bdsmlr is unstable and frequently returns 502 errors; the script will retry automatically
