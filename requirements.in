@@ -1,3 +1,5 @@
 lxml
 cssselect
 requests
+colorama
+gallery-dl
