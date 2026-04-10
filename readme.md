@@ -15,6 +15,10 @@ A Python script to scrape and collect image URLs from your liked posts on [bdsml
 - Optional direct download via gallery-dl integration
 - Updated UI for better useability and aesthetics
 
+<img width="2598" height="1389" alt="Screenshot 2026-04-09 005127" src="https://github.com/user-attachments/assets/f6a3c0e8-d8fa-4fdc-ae9d-b1df74717416" />
+<img width="2598" height="1389" alt="Screenshot 2026-04-09 004922" src="https://github.com/user-attachments/assets/a153c603-dc53-467c-b1a0-3a1d8f0d5593" />
+<img width="2598" height="1389" alt="Screenshot 2026-04-09 005127(1)" src="https://github.com/user-attachments/assets/4451c62b-a380-4727-ab6b-1ff9e18023bb" />
+
 
 
 ## Requirements
